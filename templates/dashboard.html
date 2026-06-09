@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body">
+                <h5>Total Income</h5>
+                <p class="fs-4">{{ total_income }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-danger mb-3">
+            <div class="card-body">
+                <h5>Total Expense</h5>
+                <p class="fs-4">{{ total_expense }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-info mb-3">
+            <div class="card-body">
+                <h5>Total Savings</h5>
+                <p class="fs-4">{{ total_save }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="mt-4">Recent Transactions</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in add_cash %}
+        <tr>
+            <td>Inflow</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.source }}</td>
+            <td>{{ item.date }}</td>
+        </tr>
+        {% endfor %}
+        {% for item in exp %}
+        <tr>
+            <td>Outflow</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

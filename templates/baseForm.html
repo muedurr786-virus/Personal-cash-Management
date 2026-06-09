@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="card shadow p-4">
+    <h3 class="mb-3">{{ title }}</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">{{ btn }}</button>
+    </form>
+</div>
+
+<!-- Optional: Show existing records -->
+{% if Add %}
+    <h4 class="mt-4">Cash Inflows</h4>
+    <ul>
+        {% for item in Add %}
+            <li>{{ item.source }} - {{ item.amount }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if expend %}
+    <h4 class="mt-4">Cash Outflows</h4>
+    <ul>
+        {% for item in expend %}
+            <li>{{ item.description }} - {{ item.amount }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
